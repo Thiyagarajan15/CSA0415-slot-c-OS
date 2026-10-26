@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char files[10][20], name[20];
+    int n = 0, i, ch;
+
+    while (1) {
+        printf("\n1. Create File\n2. Display Files\n3. Search File\n4. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &ch);
+
+        switch (ch) {
+        case 1:
+            printf("Enter file name: ");
+            scanf("%19s", name);
+
+            for (i = 0; i < n; i++)
+                if (strcmp(files[i], name) == 0)
+                    break;
+
+            if (i < n)
+                printf("File already exists\n");
+            else if (n < 10) {
+                strcpy(files[n++], name);
+                printf("File created successfully\n");
+            } else
+                printf("Directory is full\n");
+            break;
+
+        case 2:
+            printf("Files in directory:\n");
+            for (i = 0; i < n; i++)
+                printf("%s\n", files[i]);
+            break;
+
+        case 3:
+            printf("Enter file name to search: ");
+            scanf("%19s", name);
+
+            for (i = 0; i < n; i++)
+                if (strcmp(files[i], name) == 0)
+                    break;
+
+            if (i < n)
+                printf("File found\n");
+            else
+                printf("File not found\n");
+            break;
+
+        case 4:
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }
+}
