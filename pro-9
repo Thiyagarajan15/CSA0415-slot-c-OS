@@ -1,0 +1,30 @@
+```c
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+int main()
+{
+    int id;
+    char *p;
+
+    id = shmget(IPC_PRIVATE, 100, IPC_CREAT | 0666);
+    p = (char *)shmat(id, NULL, 0);
+
+    if(fork() == 0)
+    {
+        sprintf(p, "Hello from Child Process");
+    }
+    else
+    {
+        wait(NULL);
+        printf("Message: %s\n", p);
+        shmdt(p);
+        shmctl(id, IPC_RMID, NULL);
+    }
+
+    return 0;
+}
+```
