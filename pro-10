@@ -1,0 +1,37 @@
+```c
+#include <stdio.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+struct msg
+{
+    long type;
+    char text[100];
+};
+
+int main()
+{
+    int id;
+    struct msg m;
+
+    id = msgget(IPC_PRIVATE, 0666 | IPC_CREAT);
+
+    if(fork() == 0)
+    {
+        m.type = 1;
+        sprintf(m.text, "Hello from Child");
+        msgsnd(id, &m, sizeof(m.text), 0);
+    }
+    else
+    {
+        wait(NULL);
+        msgrcv(id, &m, sizeof(m.text), 1, 0);
+        printf("Message: %s\n", m.text);
+        msgctl(id, IPC_RMID, NULL);
+    }
+
+    return 0;
+}
+```  
