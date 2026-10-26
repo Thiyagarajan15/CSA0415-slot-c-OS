@@ -1,0 +1,72 @@
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char user[5][20], file[5][10][20], name[20];
+    int u = 0, n[5] = {0}, i, ch;
+
+    while (1) {
+        printf("\n1.Create User\n2.Create File\n3.Display\n4.Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &ch);
+
+        switch (ch) {
+        case 1:
+            printf("Enter username: ");
+            scanf("%19s", name);
+
+            for (i = 0; i < u; i++)
+                if (strcmp(user[i], name) == 0)
+                    break;
+
+            if (i < u)
+                printf("User already exists\n");
+            else if (u < 5) {
+                strcpy(user[u++], name);
+                printf("User created\n");
+            } else
+                printf("Directory full\n");
+            break;
+
+        case 2:
+            printf("Enter username: ");
+            scanf("%19s", name);
+
+            for (i = 0; i < u; i++)
+                if (strcmp(user[i], name) == 0)
+                    break;
+
+            if (i == u) {
+                printf("User not found\n");
+                break;
+            }
+
+            printf("Enter filename: ");
+            scanf("%19s", file[i][n[i]]);
+
+            if (n[i] < 10) {
+                n[i]++;
+                printf("File created\n");
+            } else
+                printf("Directory full\n");
+            break;
+
+        case 3:
+            for (i = 0; i < u; i++) {
+                printf("\nUser: %s\n", user[i]);
+                for (int j = 0; j < n[i]; j++)
+                    printf("%s\n", file[i][j]);
+            }
+            break;
+
+        case 4:
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }
+}
+```
