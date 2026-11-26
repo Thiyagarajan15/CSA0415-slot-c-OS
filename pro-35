@@ -1,0 +1,40 @@
+
+#include <stdio.h>
+
+int main()
+{
+    int index[100], n, i, block;
+
+    printf("Enter the number of file blocks: ");
+    scanf("%d", &n);
+
+    printf("\nEnter the block addresses:\n");
+
+    for(i = 0; i < n; i++)
+    {
+        printf("Block %d: ", i + 1);
+        scanf("%d", &index[i]);
+    }
+
+    printf("\nIndex Block:\n");
+
+    for(i = 0; i < n; i++)
+    {
+        printf("Index[%d] = %d\n", i, index[i]);
+    }
+
+    printf("\nEnter the file block number to access: ");
+    scanf("%d", &block);
+
+    if(block >= 1 && block <= n)
+    {
+        printf("\nFile Block %d is stored at disk block %d\n",
+               block, index[block - 1]);
+    }
+    else
+    {
+        printf("\nInvalid block number!\n");
+    }
+
+    return 0;
+}
