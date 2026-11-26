@@ -1,0 +1,23 @@
+# Display file permissions
+ls -l
+
+# Change file permissions
+chmod 755 file.txt
+
+# Change file ownership
+chown user1 file.txt
+
+# Change group ownership
+chgrp students file.txt
+
+# Give read permission
+chmod u+r file.txt
+
+# Give write permission
+chmod u+w file.txt
+
+# Give execute permission
+chmod u+x file.txt
+
+# Remove write permission
+chmod u-w file.txt
