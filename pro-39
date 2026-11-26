@@ -1,0 +1,72 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int n, i, j, head, size, total = 0;
+    int req[100], temp;
+
+    printf("Enter the number of requests: ");
+    scanf("%d", &n);
+
+    printf("Enter the disk requests:\n");
+    for(i = 0; i < n; i++)
+        scanf("%d", &req[i]);
+
+    printf("Enter initial head position: ");
+    scanf("%d", &head);
+
+    printf("Enter disk size: ");
+    scanf("%d", &size);
+
+    // Sort requests in ascending order
+    for(i = 0; i < n - 1; i++)
+    {
+        for(j = i + 1; j < n; j++)
+        {
+            if(req[i] > req[j])
+            {
+                temp = req[i];
+                req[i] = req[j];
+                req[j] = temp;
+            }
+        }
+    }
+
+    printf("\nC-SCAN Disk Scheduling:\n");
+
+    // Find requests greater than or equal to head
+    for(i = 0; i < n; i++)
+    {
+        if(req[i] >= head)
+        {
+            total += abs(req[i] - head);
+            printf("%d -> ", req[i]);
+            head = req[i];
+        }
+    }
+
+    // Move to the last cylinder
+    total += (size - 1 - head);
+    printf("%d -> ", size - 1);
+
+    // Circular movement to the beginning
+    total += size - 1;
+    printf("0 -> ");
+
+    // Service remaining requests
+    for(i = 0; i < n; i++)
+    {
+        if(req[i] < head)
+        {
+            total += abs(req[i] - head);
+            printf("%d -> ", req[i]);
+            head = req[i];
+        }
+    }
+
+    printf("\nTotal Head Movement = %d\n", total);
+
+    return 0;
+}
