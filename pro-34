@@ -1,0 +1,46 @@
+
+#include <stdio.h>
+
+int main()
+{
+    int n, i, search;
+    int records[100];
+
+    printf("Enter the number of records: ");
+    scanf("%d", &n);
+
+    printf("\nEnter the records:\n");
+    for(i = 0; i < n; i++)
+    {
+        scanf("%d", &records[i]);
+    }
+
+    printf("\nRecords stored sequentially:\n");
+    for(i = 0; i < n; i++)
+    {
+        printf("Record %d = %d\n", i + 1, records[i]);
+    }
+
+    printf("\nEnter the record number to access: ");
+    scanf("%d", &search);
+
+    if(search >= 1 && search <= n)
+    {
+        printf("\nReading records sequentially:\n");
+
+        for(i = 0; i < search; i++)
+        {
+            printf("Reading Record %d = %d\n",
+                   i + 1, records[i]);
+        }
+
+        printf("\nRequested Record = %d\n",
+               records[search - 1]);
+    }
+    else
+    {
+        printf("Invalid record number!\n");
+    }
+
+    return 0;
+}
